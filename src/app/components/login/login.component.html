@@ -1,0 +1,51 @@
+<div class="container py-4">
+  <div class="row g-0 align-items-center">
+    <div class="col-lg-6 mb-5 mb-lg-0">
+      <div
+        class="card cascading-right animate__animated animate__fadeInLeftBig"
+      >
+        <div class="card-body p-5 shadow-5 text-center">
+          <h2 class="fw-bold mb-5">Login now</h2>
+         <h2 class="fw-bold mb-5 text-danger" *ngIf="errorMessage">{{errorMessage}}</h2>
+          <div class="spinner-grow" role="status" *ngIf="spinner">
+            <span class="sr-only">...</span>
+          </div>
+          <form [formGroup]="login" (ngSubmit)="loginUser()">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                formControlName="username"
+                class="form-control"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                formControlName="password"
+                class="form-control"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Login
+            </button>
+
+            <div class="text-center">
+              <p>or <a routerLink="/">signup</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-5 mb-lg-0">
+      <img
+        src="../assets/logo.webp"
+        class="w-100 rounded-1 shadow-4 d-none d-lg-block"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
