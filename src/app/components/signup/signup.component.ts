@@ -15,8 +15,8 @@ export class SignupComponent {
   signup!: FormGroup;
   errorMessage: string = '';
   spinner: boolean = false;
-
-  constructor(private authService: AuthService) { }
+  
+  constructor(private authService: AuthService ) { }
 
   ngOnInit() {
     this.formInit();
@@ -30,12 +30,24 @@ export class SignupComponent {
       'password': new FormControl('', Validators.required),
       'repeatPassword': new FormControl('', Validators.required),
       'phone': new FormControl('', Validators.required),
+      'photo': new FormControl(''),
     });
+  }
+
+  imageUpload(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.signup.get('photo')?.setValue(file);
+    }
   }
 
   register() {
     this.spinner = true;
-    this.authService.register(this.signup.value).subscribe(
+    const signupFormData = new FormData();
+    Object.keys(this.signup.controls).forEach((k => {
+      signupFormData.append(k, this.signup.get(k)?.value);
+    }))
+    this.authService.register(signupFormData).subscribe(
       (data) => {
         this.spinner = false;
         console.log(data);
@@ -45,6 +57,5 @@ export class SignupComponent {
         console.log(err);
       }
     )
-    console.log(this.signup.value);
   }
 }
