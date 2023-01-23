@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-12 col-md-4">
+      <div class="card">
+        <img
+          src="{{currentUser.photo}}"
+          class="card-img-top rounded-4 h-25"
+          alt="Fissure in Sandstone"
+        />
+        <div class="card-body ">
+          <h5 class="card-title"> username : {{currentUser.username}}</h5>
+          <p class="card-text">
+           firstname:  {{currentUser.firstName}}
+          </p>
+          <p class="card-text">
+           lastname: {{currentUser.lastName}}
+          </p>
+          <p class="card-text">
+           email: {{currentUser.email}}
+          </p>
+          <p class="card-text">
+           phone: {{currentUser.phone}}
+          </p>
+          <button class="btn btn-primary" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

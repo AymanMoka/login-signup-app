@@ -2,7 +2,9 @@ import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import {TokenService} from "../../services/token.service";
+import { Result } from 'src/app/model/result';
 
 @Component({
   selector: 'app-signup',
@@ -15,8 +17,8 @@ export class SignupComponent {
   signup!: FormGroup;
   errorMessage: string = '';
   spinner: boolean = false;
-  
-  constructor(private authService: AuthService ) { }
+
+  constructor(private authService: AuthService, private router:Router , private  tokenService:TokenService) { }
 
   ngOnInit() {
     this.formInit();
@@ -48,9 +50,10 @@ export class SignupComponent {
       signupFormData.append(k, this.signup.get(k)?.value);
     }))
     this.authService.register(signupFormData).subscribe(
-      (data) => {
+      (data:Result) => {
         this.spinner = false;
-        console.log(data);
+        this.tokenService.setToken(data.token);
+        this.router.navigate(['/home'])
       }, err => {
         this.spinner = false;
         this.errorMessage = err.error.message;

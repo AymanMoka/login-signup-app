@@ -6,4 +6,5 @@ export class User {
     password: string = '';
     repeatPassword: string = '';
     phone!: number;
+    photo!: string;
 }
