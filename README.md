@@ -46,7 +46,6 @@ run npm install
 ng serve 
 
 
-
-
-
+![SIGNUP](src/assets/signup.png)
+![LOGIN](src/assets/login.png)
 
